@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ийгиликтин 7 Максаты жана Өзүн-өзү Таануу</title>
+    <!-- Встроенный дизайн CSS. Файл работает без интернета! -->
+    <style>
+        /* Базовые стили для адаптивности */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f7f9fb;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .slide-container {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .slide-content {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            width: 95%;
+            margin: 20px auto;
+            min-height: 550px;
+            display: flex;
+            flex-direction: column;
+        }
+        .nav-footer {
+            background-color: white;
+            border-top: 1px solid #e2e8f0;
+            padding: 15px 0;
+            position: sticky;
+            bottom: 0;
+        }
+        .nav-wrapper {
+            max-width: 768px; /* Ограничение ширины для мобильных */
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+        }
+        .nav-button {
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+            flex-grow: 1;
+            margin: 0 5px;
+            max-width: 150px;
+        }
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .prev-btn {
+            background-color: #e5e7eb;
+            color: #4b5563;
+        }
+        .next-btn {
+            background-color: #0d9488; /* Teal-600 */
+            color: white;
+        }
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #cbd5e1; /* Gray-300 */
+            margin: 0 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .dot.active {
+            background-color: #0d9488; /* Teal-600 */
+        }
+        /* Стилизация контента */
+        .header {
+            text-align: center;
+            color: #047857; /* Teal-700 */
+            margin-bottom: 30px;
+        }
+        .title {
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+        .subtitle {
+            font-size: 1.25rem;
+            color: #6b7280; /* Gray-500 */
+        }
+        .list-item {
+            padding: 10px;
+            background-color: #f0fdfa; /* Teal-50 */
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .highlight-box {
+            padding: 15px;
+            border-left: 4px solid;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        .amber-bg {
+            background-color: #fffbeb;
+            border-color: #f59e0b;
+        }
+        .blue-bg {
+            background-color: #eff6ff;
+            border-color: #3b82f6;
+        }
+        .red-bg {
+            background-color: #fef2f2;
+            border-color: #ef4444;
+        }
+        .purple-bg {
+            background-color: #f5f3ff;
+            border-color: #8b5cf6;
+        }
+        .content-flex {
+            display: flex;
+            flex-grow: 1;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .grid-2 {
+            display: grid;
+            gap: 20px;
+        }
+        @media (min-width: 768px) {
+            .grid-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .title {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <main id="presentation-main">
+        <div id="slide-display" class="slide-container">
+            <!-- Content will be injected here -->
+        </div>
+    </main>
+
+    <footer class="nav-footer">
+        <div class="nav-wrapper">
+            <button id="prev-btn" class="nav-button prev-btn" disabled>
+                &larr; Артка
+            </button>
+
+            <div id="slide-dots" class="flex">
+                <!-- Dots will be generated here -->
+            </div>
+
+            <button id="next-btn" class="nav-button next-btn">
+                Алдыга &rarr;
+            </button>
+        </div>
+    </footer>
+
+    <script>
+        // Слайд мазмуну (Кыргыз тилинде)
+        const slides = [
+            {
+                title: "Ийгиликтин 7 Максаты жана Өзүн-өзү Таануу",
+                subtitle: "Жашоону өзгөртүүчү жеке өсүүгө жол",
+                content: `
+                    <div class="header">
+                        <h1 class="title">Ийгиликтин 7 Максаты</h1>
+                        <p class="subtitle text-2xl">Ички өзгөрүү жана туруктуу өнүгүү жолу</p>
+                        <div style="margin: 20px auto; width: 100px; height: 4px; background-color: #0d9488; border-radius: 9999px;"></div>
+                    </div>
+                `
+            },
+            {
+                title: "1-СЛАЙД: Ийгиликтин Негизги 7 Максаты",
+                subtitle: "Максатты тактоо, аракет кылуу жана өнүгүү",
+                content: `
+                    <div class="grid-2 text-gray-700">
+                        <ul style="list-style: none; padding: 0;">
+                            <li class="list-item">1. Максатты так аныктоо (SMART)</li>
+                            <li class="list-item">2. Стратегияны түзүү жана пландоо</li>
+                            <li class="list-item">3. Туруктуу аракеттерди көрүү</li>
+                            <li class="list-item">4. Үзгүлтүксүз өнүгүү жана ыңгайлашуу</li>
+                        </ul>
+                        <ul style="list-style: none; padding: 0;">
+                            <li class="list-item">5. Позитивдүү маанайды сактоо</li>
+                            <li class="list-item">6. Колдоочу чөйрөнү түзүү</li>
+                            <li class="list-item">7. Сабырдуулук жана берилгендик</li>
+                        </ul>
+                    </div>
+                `
+            },
+            {
+                title: "2-СЛАЙД: Руханий Өнүгүүнүн Түрлөрү",
+                subtitle: "Жеке өсүү беш аспектти камтыйт",
+                content: `
+                    <div style="color: #4b5563;">
+                        <p style="font-size: 1.1rem; font-weight: 500; margin-bottom: 20px;">Руханий өнүгүү – бул инсандын өзүнүн баалуулуктарын, дүйнө таанымын жана Жараткан менен болгон байланышын тереңдетүү процесси. Жеке өнүгүү төмөнкүдөй түрлөргө бөлүнөт:</p>
+                        <ul style="list-style: disc; padding-left: 25px; font-size: 1rem;">
+                            <li style="margin-bottom: 8px;"><strong>Руханий өнүгүү:</strong> Маани-максатты табуу, ички тынчтыкты орнотуу.</li>
+                            <li style="margin-bottom: 8px;"><strong>Акыл-эс өнүгүүсү:</strong> Үзгүлтүксүз билим алуу, аналитикалык ой жүгүртүүнү өркүндөтүү.</li>
+                            <li style="margin-bottom: 8px;"><strong>Эмоционалдык өнүгүү:</strong> Сезимдерди башкаруу, эмоционалдык интеллектти жогорулатуу.</li>
+                            <li style="margin-bottom: 8px;"><strong>Социалдык өнүгүү:</strong> Мамилелерди жакшыртуу, баарлашуу көндүмдөрүн өркүндөтүү.</li>
+                            <li><strong>Физикалык өнүгүү:</strong> Ден-соолукту чыңдоо, активдүү жашоо образы.</li>
+                        </ul>
+                    </div>
+                `
+            },
+            {
+                title: "3-СЛАЙД: Ыраазычылык Практикасы",
+                subtitle: "Мен эмнеге ыраазымын? (6 сүйлөм)",
+                content: `
+                    <p style="font-size: 1.1rem; font-weight: 500; color: #4b5563; margin-bottom: 25px;">Ыраазычылык - бул позитивдүү маанайдын негизи. Күн сайын ушул сүйлөмдөрдү кайталаңыз:</p>
+                    <div class="grid-2">
+                        <div class="highlight-box amber-bg">
+                            <span style="font-weight: bold; color: #b45309;">1.</span> Мен <strong>ден-соолугум чың</strong> болгонуна ыраазымын.
+                        </div>
+                        <div class="highlight-box amber-bg">
+                            <span style="font-weight: bold; color: #b45309;">2.</span> Мен жашоомдогу бардык <strong>мүмкүнчүлүктөргө</strong> ыраазымын.
+                        </div>
+                        <div class="highlight-box amber-bg">
+                            <span style="font-weight: bold; color: #b45309;">3.</span> Мен мени <strong>сүйгөн жана колдогон</strong> жакындарыма ыраазымын.
+                        </div>
+                        <div class="highlight-box amber-bg">
+                            <span style="font-weight: bold; color: #b45309;">4.</span> Мен күн сайын <strong>үйрөнүп, өнүгүп</strong> жатканыма ыраазымын.
+                        </div>
+                        <div class="highlight-box amber-bg">
+                            <span style="font-weight: bold; color: #b45309;">5.</span> Мен башымдан өткөн бардык <strong>кыйынчылыктарга (сабактарга)</strong> ыраазымын.
+                        </div>
+                        <div class="highlight-box amber-bg">
+                            <span style="font-weight: bold; color: #b45309;">6.</span> Мен азыркы учурда <strong>бактылуу жана тынч</strong> жашап жатканыма ыраазымын.
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "4-СЛАЙД: Өзүн-өзү Байкоо: Ойлорду Таануу",
+                subtitle: "Ойлоп ду байкоо жана анын багыты",
+                content: `
+                    <p style="font-size: 1.1rem; color: #4b5563; margin-bottom: 20px; font-weight: 500;">Кимдир бирөө сүйлөп жаткандай, өзүңүздүн ички монологуңузду байкаңыз:</p>
+                    <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: space-around;">
+                        <div class="highlight-box blue-bg" style="border-left: 4px solid #3b82f6;">
+                            <h3 style="font-weight: 600; font-size: 1.15rem; color: #1e40af;">🎯 Ойдун булагы:</h3>
+                            <p style="color: #4b5563;">Ойлор каяктан келип жатат? Эски эскерүүлөрдөнбү, келечекке болгон тынчсызданууларданбы же азыркы учурдагы байкоолордонбу?</p>
+                        </div>
+                        <div class="highlight-box blue-bg" style="border-left: 4px solid #3b82f6;">
+                            <h3 style="font-weight: 600; font-size: 1.15rem; color: #1e40af;">🧭 Ойдун багыты:</h3>
+                            <p style="color: #4b5563;">Кайсы ойлор максатыңызга (ийгиликке) багытталган, кайсынысы энергияңызды текке кетирип жатат?</p>
+                        </div>
+                        <div class="highlight-box blue-bg" style="border-left: 4px solid #3b82f6;">
+                            <h3 style="font-weight: 600; font-size: 1.15rem; color: #1e40af;">⚖️ Бейтарап болуу:</h3>
+                            <p style="color: #4b5563;">Ойлорду баалабай, жөн гана байкаңыз. Сиз өзүңүздүн оюңуз эмессиз.</p>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "5-СЛАЙД: Өзүн-өзү Байкоо: Эмоция жана Реакция",
+                subtitle: "Ички дүйнөдөгү процесстерди түшүнүү",
+                content: `
+                    <div class="grid-2">
+                        <!-- Эмоцияларды байкоо -->
+                        <div class="red-bg highlight-box" style="border-left: 4px solid #ef4444; padding: 20px;">
+                            <h3 style="font-size: 1.5rem; font-weight: bold; color: #b91c1c; margin-bottom: 12px;">Эмоцияларды Байкоо</h3>
+                            <ul style="list-style: disc; padding-left: 20px; color: #4b5563;">
+                                <li><strong>Аныктоо:</strong> Азыр кандай эмоцияны сезип жатасыз?</li>
+                                <li><strong>Кабыл алуу:</strong> Аны баалабай, жөн эле кабыл алыңыз.</li>
+                                <li><strong>Убактылуулук:</strong> Ар бир эмоция убактылуу экенин унутпаңыз.</li>
+                            </ul>
+                        </div>
+                        <!-- Реакцияны байкоо -->
+                        <div class="highlight-box" style="border-left: 4px solid #10b981; background-color: #ecfdf5; padding: 20px;">
+                            <h3 style="font-size: 1.5rem; font-weight: bold; color: #059669; margin-bottom: 12px;">Реакцияны Байкоо</h3>
+                            <ul style="list-style: disc; padding-left: 20px; color: #4b5563;">
+                                <li><strong>Тындыруу:</strong> Реакция пайда болгондо 5 секунд тыныгуу жасаңыз.</li>
+                                <li><strong>Тандоо:</strong> Бул автоматтык реакциябы же аң-сезимдүү жооппу?</li>
+                                <li><strong>Башкаруу:</strong> Реакцияны акылдуу жоопко алмаштырыңыз.</li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "6-СЛАЙД: Өзүн-өзү Байкоо: Денени Угуу",
+                subtitle: "Дене – бул эмоциялардын жана стресстин картасы",
+                content: `
+                    <div style="color: #4b5563; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-around;">
+                        <p style="font-size: 1.1rem; font-weight: 500; margin-bottom: 20px;">Биздин денебиз ойлор жана эмоциялар жөнүндө баарын айтып берет. Ага көңүл буруңуз:</p>
+                        <div class="highlight-box purple-bg" style="border-left: 4px solid #8b5cf6;">
+                            <h3 style="font-weight: 600; font-size: 1.15rem; color: #7c3aed;">🧘 Тынчсызданууну байкоо:</h3>
+                            <p>Стресс учурунда далыңыз, моюнуңуз же курсагыңыз кандай абалда? Чыңалуу кайда топтолот?</p>
+                        </div>
+                        <div class="highlight-box purple-bg" style="border-left: 4px solid #8b5cf6;">
+                            <h3 style="font-weight: 600; font-size: 1.15rem; color: #7c3aed;">💨 Дем алуу:</h3>
+                            <p>Дем алууңуз тезби же жайбы? Тайызбы же тереңби? Терең дем алуу менен абал өзгөрөбү?</p>
+                        </div>
+                        <div class="highlight-box purple-bg" style="border-left: 4px solid #8b5cf6;">
+                            <h3 style="font-weight: 600; font-size: 1.15rem; color: #7c3aed;">🔋 Энергиянын деңгээли:</h3>
+                            <p>Күн бою өзүңүздү канчалык энергиялуу же чарчаңкы сезесиз? Бул энергия уйку менен байланыштуубу?</p>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "7-СЛАЙД: Жыйынтык: Улантууга Чакыруу",
+                subtitle: "Өнүгүү жолунда алгачкы кадам",
+                content: `
+                    <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; flex-grow: 1; padding: 20px;">
+                        <h2 style="font-size: 2rem; font-weight: bold; color: #1f2937; margin-bottom: 15px;">Өнүгүү – бул үзгүлтүксүз процесс</h2>
+                        <p style="font-size: 1.1rem; color: #4b5563; margin-bottom: 20px;">Ийгиликке жетүүнүн 7 максаты – бул сырткы жетишкендиктер гана эмес, бул биринчи кезекте ички гармония жана өзүн-өзү таануу.</p>
+                        <p style="font-size: 1.1rem; font-weight: 600; color: #0d9488; margin-bottom: 30px;">Күн сайын ойлоруңузду, эмоцияларыңызды жана денеңизди байкоодон баштаңыз. Бул сиздин өнүгүүңүздүн эң маанилүү түрү.</p>
+                        <span style="display: inline-block; padding: 12px 24px; background-color: #0d9488; color: white; font-size: 1.25rem; font-weight: bold; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">Ийгилик Сиздин Колуңузда!</span>
+                    </div>
+                `
+            }
+        ];
+
+        let currentSlideIndex = 0;
+        const slideDisplay = document.getElementById('slide-display');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const slideDots = document.getElementById('slide-dots');
+
+        /**
+         * Слайддарды көрсөтүү жана UI жаңыртуу
+         * @param {number} index - Көрсөтүлө турган слайддын индекси
+         */
+        function showSlide(index) {
+            if (index < 0 || index >= slides.length) return;
+
+            const slide = slides[index];
+            
+            // Жаңы мазмунду даярдоо
+            const newContent = `
+                <div class="slide-content">
+                    <h2 style="font-size: 1.5rem; color: #4b5563; margin-bottom: 5px;">${slide.title}</h2>
+                    <p style="font-size: 1rem; color: #9ca3af; margin-bottom: 30px;">${slide.subtitle}</p>
+                    <div class="content-flex">${slide.content}</div>
+                </div>
+            `;
+            
+            // Учурдагы слайдды өчүрүү эффекти
+            slideDisplay.style.opacity = 0;
+
+            setTimeout(() => {
+                slideDisplay.innerHTML = newContent;
+                slideDisplay.style.opacity = 1; 
+            }, 500); // 0.5s transition time
+
+            currentSlideIndex = index;
+            updateUI();
+        }
+
+        /**
+         * Кнопкалардын абалын жана индикаторлорду жаңыртуу
+         */
+        function updateUI() {
+            prevBtn.disabled = currentSlideIndex === 0;
+            nextBtn.disabled = currentSlideIndex === slides.length - 1;
+
+            // Индикаторлорду жаңыртуу (чекиттер)
+            slideDots.innerHTML = '';
+            slides.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (index === currentSlideIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.addEventListener('click', () => showSlide(index));
+                }
+                slideDots.appendChild(dot);
+            });
+        }
+
+        // Навигация функциялары
+        prevBtn.addEventListener('click', () => showSlide(currentSlideIndex - 1));
+        nextBtn.addEventListener('click', () => showSlide(currentSlideIndex + 1));
+
+        // Клавиатура навигациясы (для ноутбука)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' && currentSlideIndex < slides.length - 1) {
+                showSlide(currentSlideIndex + 1);
+            } else if (e.key === 'ArrowLeft' && currentSlideIndex > 0) {
+                showSlide(currentSlideIndex - 1);
+            }
+        });
+
+        // Баштапкы слайдды көрсөтүү
+        document.addEventListener('DOMContentLoaded', () => {
+            showSlide(0);
+        });
+
+    </script>
+</body>
+</html>
